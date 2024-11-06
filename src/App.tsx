@@ -122,19 +122,20 @@ function App() {
             />
           </View>
 
+          <View>
+            <Text style={styles.h1}>Stacked Card</Text>
+            <StackedCard
+              title={title}
+              subtitle={subtitle}
+              note={note}
+              description={description}
+              highlights={highlights}
+              style={styles.example}
+            />
+          </View>
       <h2>Description Table</h2>
       <DescriptionTable
         data={[sampleData, sampleData]}
-        className={styles.example}
-      />
-
-      <h2>Stacked Card</h2>
-      <StackedCard
-        title={title}
-        subtitle={subtitle}
-        note={note}
-        description={description}
-        highlights={highlights}
         className={styles.example}
       />
 

@@ -1,13 +1,39 @@
-import classnames from 'classnames';
+import { View, Text, StyleSheet } from '@react-pdf/renderer';
+import { Style } from '@react-pdf/types';
 
 import HorizontalList from './utilities/HorizontalList';
+import UnorderedList from './utilities/UnorderedList';
 import LinkifiedSpan from './utilities/LinkifiedSpan';
 import type { CardProps } from './types';
 
-import styles from './StackedCard.module.css';
+import rootStyles from './styles';
+
+const styles = StyleSheet.create({
+  header: {
+    display: 'flex',
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    alignItems: 'flex-end',
+    columnGap: '20',
+  },
+  title: {
+    fontSize: 13,
+    fontWeight: 'bold',
+  },
+  body: {
+    marginTop: 2.5,
+  },
+  description: {},
+  highlights: {
+    margin: 0,
+  },
+  note: {
+    marginTop: 5,
+  },
+});
 
 interface Props extends CardProps {
-  className?: string;
+  style?: Style | Style[];
 }
 
 export default function StackedCard({
@@ -16,7 +42,7 @@ export default function StackedCard({
   note = [],
   description = [],
   highlights = [],
-  className,
+  style: inheritedStyle,
 }: Props) {
   title = [title].flat().filter(Boolean);
   subtitle = [subtitle].flat().filter(Boolean);
@@ -25,45 +51,43 @@ export default function StackedCard({
   highlights = [highlights].flat().filter(Boolean);
 
   return (
-    <div className={classnames(styles.container, className)}>
-      <div className={styles.header}>
-        <span className={classnames(styles.title, 'title', 'bold')}>
-          {title.join(' ')}
-        </span>
+    <View style={inheritedStyle}>
+      <View style={styles.header}>
+        <Text style={[styles.title, rootStyles.bold]}>{title.join(' ')}</Text>
         {subtitle.length ? (
-          <span className="subtitle">
-            <HorizontalList>{subtitle}</HorizontalList>
-          </span>
-        ) : null}
-      </div>
-
-      <div className={classnames(styles.body, 'body')}>
-        {description.length ? (
-          <div className="description">
-            {description.map((entry, index) => (
-              <div key={index}>{entry}</div>
+          <HorizontalList style={rootStyles.content}>
+            {subtitle.map((item, index) => (
+              <Text key={index}>{item}</Text>
             ))}
-          </div>
+          </HorizontalList>
+        ) : null}
+      </View>
+
+      <View style={[styles.body, rootStyles.content]}>
+        {description.length ? (
+          <View style={styles.description}>
+            {description.map((entry, index) => (
+              <Text key={index}>{entry}</Text>
+            ))}
+          </View>
         ) : null}
 
         {highlights.length ? (
-          <ul className={classnames(styles.highlights, 'highlights')}>
+          <UnorderedList style={styles.highlights}>
             {highlights.map((entry, index) => (
-              <li key={index}>{entry}</li>
+              <Text key={index}>{entry}</Text>
             ))}
-          </ul>
+          </UnorderedList>
         ) : null}
 
         {note.length ? (
-          <div className={classnames(styles.note, 'note')}>
-            <HorizontalList>
-              {note.map((entry, index) => (
-                <LinkifiedSpan key={index} value={entry} />
-              ))}
-            </HorizontalList>
-          </div>
+          <HorizontalList style={styles.note}>
+            {note.map((entry, index) => (
+              <LinkifiedSpan key={index}>{entry}</LinkifiedSpan>
+            ))}
+          </HorizontalList>
         ) : null}
-      </div>
-    </div>
+      </View>
+    </View>
   );
 }
