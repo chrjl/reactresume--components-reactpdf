@@ -17,7 +17,7 @@ const { title, subtitle, note, description, highlights } = sampleData;
 const styles = StyleSheet.create({
   page: {
     padding: '0.5in',
-    fontSize: 14,
+    fontSize: 12,
   },
   h1: {
     fontWeight: 'bold',
@@ -84,6 +84,28 @@ function App() {
             <View style={styles.example}>
               <LinkifiedSpan>https://example.com</LinkifiedSpan>
             </View>
+          </View>
+
+          <View>
+            <Text style={styles.h1}>Unordered List</Text>
+            <UnorderedList style={styles.example}>
+              <Text>
+                Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+              </Text>
+              <Text>
+                Dolorum veniam ad molestiae blanditiis eum illum ducimus
+                exercitationem ex in accusamus quibusdam, a quam dolores
+                voluptas maiores commodi quos reiciendis minima.
+              </Text>
+              <Text>
+                Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+              </Text>
+              <Text>
+                Cumque quaerat ea non esse temporibus voluptatum officia
+                delectus illum rerum iusto, quo, aspernatur voluptatibus quae
+                labore quisquam. Minus similique non maiores?
+              </Text>
+            </UnorderedList>
           </View>
         </Page>
 

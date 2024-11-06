@@ -1,4 +1,5 @@
 export { default as HorizontalList } from './utilities/HorizontalList';
+export { default as UnorderedList } from './utilities/UnorderedList';
 export { default as LinkifiedSpan } from './utilities/LinkifiedSpan';
 export { default as HeadingCard } from './HeadingCard';
 export { default as DescriptionTable } from './DescriptionTable';
