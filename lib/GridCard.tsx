@@ -1,13 +1,16 @@
-import classnames from 'classnames';
+import { View, Text, StyleSheet } from '@react-pdf/renderer';
+import { Style } from '@react-pdf/types';
 
 import HorizontalList from './utilities/HorizontalList';
+import UnorderedList from './utilities/UnorderedList';
 import LinkifiedSpan from './utilities/LinkifiedSpan';
 import type { CardProps } from './types';
 
-import styles from './GridCard.module.css';
+import rootStyles from './styles';
 
 interface Props extends CardProps {
-  className?: string;
+  width?: number | string;
+  style?: Style | Style[];
 }
 
 export default function GridCard({
@@ -16,7 +19,8 @@ export default function GridCard({
   note = [],
   description = [],
   highlights = [],
-  className,
+  width = 260,
+  style: inheritedStyle,
 }: Props) {
   title = [title].flat().filter(Boolean);
   subtitle = [subtitle].flat().filter(Boolean);
@@ -24,46 +28,84 @@ export default function GridCard({
   description = [description].flat().filter(Boolean);
   highlights = [highlights].flat().filter(Boolean);
 
-  return (
-    <div className={classnames(styles.container, className)}>
-      <div className={styles.header}>
-        <span className={classnames(styles.title, 'title', 'bold')}>
-          {title.join(' ')}
-        </span>
-        {subtitle.length ? (
-          <ul className={classnames(styles.subtitle, 'subtitle')}>
-            {subtitle.map((entry, index) => (
-              <li key={index}>{entry}</li>
-            ))}
-          </ul>
-        ) : null}
-      </div>
+  const styles = StyleSheet.create({
+    container: {
+      width,
+    },
+    title: {
+      fontSize: '11',
+      fontWeight: 'bold',
+      textTransform: 'uppercase',
+    },
+    subtitle: {
+      display: 'flex',
+      flexDirection: 'row',
+      flexWrap: 'wrap',
+      justifyContent: 'flex-end',
+      columnGap: 10,
+      textTransform: 'uppercase',
+      fontWeight: 'bold',
+      color: '#4b5563',
+    },
+    body: {
+      marginTop: 0.25,
+    },
+    highlights: {
+      margin: 0,
+      paddingLeft: 12.5,
+    },
+    note: {
+      padding: 0,
+      marginTop: 5,
+      marginBottom: 0,
+      fontSize: 9,
+    },
+  });
 
-      <div className={classnames(styles.body, 'body')}>
+  const containerStyle = inheritedStyle
+    ? [inheritedStyle, styles.container].flat()
+    : styles.container;
+
+  return (
+    <View style={containerStyle}>
+      <Text style={[styles.title, rootStyles.bold]}>{title.join(' ')}</Text>
+      {subtitle.length ? (
+        <View style={[styles.subtitle, rootStyles.content]}>
+          {subtitle.map((entry, index) => (
+            <Text key={index}>{entry}</Text>
+          ))}
+        </View>
+      ) : null}
+
+      <View style={[styles.body, rootStyles.content]}>
         {description.length ? (
           <div className="description">
-            <HorizontalList>{description}</HorizontalList>
+            <HorizontalList>
+              {description.map((entry, index) => (
+                <Text key={index}>{entry}</Text>
+              ))}
+            </HorizontalList>
           </div>
         ) : null}
 
         {highlights.length ? (
-          <ul className={classnames(styles.highlights, 'highlights')}>
+          <UnorderedList style={styles.highlights} padding={10}>
             {highlights.map((entry, index) => (
-              <li key={index}>{entry}</li>
+              <Text key={index}>{entry}</Text>
             ))}
-          </ul>
+          </UnorderedList>
         ) : null}
 
         {note.length ? (
-          <ul className={classnames(styles.note, 'note')}>
+          <View style={styles.note}>
             {note.map((entry, index) => (
               <li key={index}>
-                <LinkifiedSpan value={entry} />
+                <LinkifiedSpan>{entry}</LinkifiedSpan>
               </li>
             ))}
-          </ul>
+          </View>
         ) : null}
-      </div>
-    </div>
+      </View>
+    </View>
   );
 }

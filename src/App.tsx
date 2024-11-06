@@ -29,6 +29,12 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 21,
   },
+  grid: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    rowGap: 10,
+    justifyContent: 'space-between',
+  },
   example: {
     backgroundColor: 'lightgray',
     marginVertical: '5',
@@ -133,25 +139,44 @@ function App() {
               style={styles.example}
             />
           </View>
+          <View wrap={false}>
+            <Text style={styles.h1}>Grid Card</Text>
+            <View style={[styles.example, styles.grid]}>
+              <GridCard
+                title={title}
+                subtitle={subtitle}
+                note={note}
+                description={description}
+                highlights={highlights}
+              />
+              <GridCard
+                title={title}
+                subtitle={subtitle}
+                note={note}
+                description={description}
+                highlights={highlights}
+              />
+              <GridCard
+                title={title}
+                subtitle={subtitle}
+                note={note}
+                description={description}
+                highlights={highlights}
+              />
+              <GridCard
+                title={title}
+                subtitle={subtitle}
+                note={note}
+                description={description}
+                highlights={highlights}
+              />
+            </View>
+          </View>
       <h2>Description Table</h2>
       <DescriptionTable
         data={[sampleData, sampleData]}
         className={styles.example}
       />
-
-      <h2>Grid Card</h2>
-      <div className={styles.grid}>
-        {Array(4).fill(
-          <GridCard
-            title={title}
-            subtitle={subtitle}
-            note={note}
-            description={description}
-            highlights={highlights}
-            className={styles.example}
-          />
-        )}
-      </div>
 
       <h1>Sample data</h1>
       <pre>{JSON.stringify(sampleData, null, 2)}</pre>
