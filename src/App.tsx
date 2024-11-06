@@ -40,53 +40,35 @@ function App() {
     <PDFViewer width="100%" height="100%">
       <Document>
         <Page size="LETTER" style={styles.page}>
+          <View>
+            <Text style={styles.h1}>Horizontal List</Text>
+            <Text style={styles.h2}>Plain text child</Text>
+            <HorizontalList style={styles.example}>
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+              Inventore consequatur provident, necessitatibus commodi similique
+              deleniti. Nobis aperiam perferendis quas quod cumque laudantium
+              saepe incidunt enim nesciunt maxime. Rem, suscipit itaque?
+            </HorizontalList>
 
-      <h2>Horizontal List</h2>
-      <div>
-        Single child:
-        <HorizontalList className={styles.example}>
-          <div>child</div>
-        </HorizontalList>
-      </div>
-      <div>
-        Left variant:
-        <HorizontalList className={styles.example}>
-          {loremArr.map((entry, index) => (
-            <span key={index}>{entry}</span>
-          ))}
-        </HorizontalList>
-      </div>
-      <div>
-        Right variant:
-        <HorizontalList variant="right" className={styles.example}>
-          {loremArr.map((entry, index) => (
-            <span key={index}>{entry}</span>
-          ))}
-        </HorizontalList>
-      </div>
+            <Text style={styles.h2}>Single Element child</Text>
+            <HorizontalList style={styles.example}>
+              <Text>Child</Text>
+            </HorizontalList>
 
-      <h2>Linkified Span</h2>
+            <Text style={styles.h2}>Left variant</Text>
+            <HorizontalList style={styles.example}>
+              {loremArr.map((item, index) => (
+                <Text key={index}>{item}</Text>
+              ))}
+            </HorizontalList>
 
-      <ul>
-        <li>
-          String:
-          <span className={styles.example}>
-            <LinkifiedSpan value="string" />
-          </span>
-        </li>
-        <li>
-          URL:
-          <span className={styles.example}>
-            <LinkifiedSpan value="https://example.com" />
-          </span>
-        </li>
-        <li>
-          Email:
-          <span className={styles.example}>
-            <LinkifiedSpan value="example@example.com" />
-          </span>
-        </li>
-      </ul>
+            <Text style={styles.h2}>Right variant</Text>
+            <HorizontalList variant="right" style={styles.example}>
+              {loremArr.map((item, index) => (
+                <Text key={index}>{item}</Text>
+              ))}
+            </HorizontalList>
+          </View>
 
       <h1>Display components</h1>
 
