@@ -70,6 +70,21 @@ function App() {
             </HorizontalList>
           </View>
 
+          <View>
+            <Text style={styles.h1}>Linkified Span</Text>
+            <Text style={styles.h2}>String</Text>
+            <View style={styles.example}>
+              <LinkifiedSpan>string</LinkifiedSpan>
+            </View>
+            <Text style={styles.h2}>Email</Text>
+            <View style={styles.example}>
+              <LinkifiedSpan>example@example.com</LinkifiedSpan>
+            </View>
+            <Text style={styles.h2}>URL</Text>
+            <View style={styles.example}>
+              <LinkifiedSpan>https://example.com</LinkifiedSpan>
+            </View>
+          </View>
       <h1>Display components</h1>
 
       <h2>Heading Card</h2>

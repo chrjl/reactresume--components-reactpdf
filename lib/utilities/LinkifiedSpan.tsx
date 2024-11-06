@@ -1,20 +1,18 @@
+import { Text, Link } from '@react-pdf/renderer';
+
 import isEmail from 'validator/lib/isEmail';
 import isURL from 'validator/lib/isURL';
 
 interface Props {
-  value: string;
+  children: string;
 }
 
-export default function LinkifiedSpan({ value }: Props) {
-  if (isEmail(value)) {
-    return <a href={`mailto:${value}`}>{value}</a>;
-  } else if (isURL(value)) {
-    return (
-      <a href={value} target="_blank">
-        {value}
-      </a>
-    );
+export default function LinkifiedSpan({ children }: Props) {
+  if (isEmail(children)) {
+    return <Link src={`mailto:${children}`}>{children}</Link>;
+  } else if (isURL(children)) {
+    return <Link src={children}>{children}</Link>;
   }
 
-  return <span>{value}</span>;
+  return <Text>{children}</Text>;
 }
