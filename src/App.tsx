@@ -85,17 +85,20 @@ function App() {
               <LinkifiedSpan>https://example.com</LinkifiedSpan>
             </View>
           </View>
-      <h1>Display components</h1>
+        </Page>
 
-      <h2>Heading Card</h2>
-      <HeadingCard
-        title={title}
-        subtitle={subtitle}
-        note={note}
-        description={description}
-        highlights={highlights}
-        className={styles.example}
-      />
+        <Page size="LETTER" style={styles.page}>
+          <View>
+            <Text style={styles.h1}>Heading Card</Text>
+            <HeadingCard
+              title={title}
+              subtitle={subtitle}
+              note={note}
+              description={description}
+              highlights={highlights}
+              style={styles.example}
+            />
+          </View>
 
       <h2>Description Table</h2>
       <DescriptionTable

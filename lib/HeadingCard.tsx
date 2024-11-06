@@ -1,13 +1,33 @@
-import classnames from 'classnames';
+import { View, Text, StyleSheet } from '@react-pdf/renderer';
+import { Style } from '@react-pdf/types';
 
 import HorizontalList from './utilities/HorizontalList';
 import LinkifiedSpan from './utilities/LinkifiedSpan';
 import type { CardProps } from './types';
 
-import styles from './HeadingCard.module.css';
+import rootStyles from './styles';
+
+const styles = StyleSheet.create({
+  title: {
+    fontSize: 22,
+    margin: 0,
+  },
+  subtitle: {
+    fontSize: 14,
+    fontWeight: 700,
+    marginTop: 0,
+    marginBottom: 5,
+  },
+  highlights: {
+    margin: 0,
+  },
+  description: {
+    margin: 0,
+  },
+});
 
 interface Props extends CardProps {
-  className?: string;
+  style?: Style | Style[];
 }
 
 export default function HeadingCard({
@@ -16,7 +36,7 @@ export default function HeadingCard({
   note = [],
   description = [],
   highlights = [],
-  className,
+  style: inheritedStyle,
 }: Props) {
   title = [title].flat().filter(Boolean);
   subtitle = [subtitle].flat().filter(Boolean);
@@ -25,34 +45,32 @@ export default function HeadingCard({
   highlights = [highlights].flat().filter(Boolean);
 
   return (
-    <div className={className}>
+    <View style={inheritedStyle}>
       {title.length ? (
-        <h1 className={classnames(styles.title, 'heading')}>
+        <Text style={[styles.title, rootStyles.heading]}>
           {title.join(' ')}
-        </h1>
+        </Text>
       ) : null}
 
       {subtitle.length ? (
-        <h2 className={classnames(styles.subtitle, 'heading')}>
+        <Text style={[styles.subtitle, rootStyles.heading]}>
           {subtitle.join(' ')}
-        </h2>
+        </Text>
       ) : null}
 
       {highlights.length ? (
-        <div className={classnames(styles.highlights, 'highlights')}>
-          <HorizontalList>
-            {[note, highlights].flat().map((entry, index) => (
-              <LinkifiedSpan value={entry} key={index} />
-            ))}
-          </HorizontalList>
-        </div>
+        <HorizontalList style={[styles.highlights, rootStyles.content]}>
+          {[note, highlights].flat().map((entry, index) => (
+            <LinkifiedSpan key={index}>{entry}</LinkifiedSpan>
+          ))}
+        </HorizontalList>
       ) : null}
 
       {description.length ? (
-        <div className={classnames(styles.description, 'description')}>
+        <Text style={[styles.description, rootStyles.content]}>
           {description.join(', ')}
-        </div>
+        </Text>
       ) : null}
-    </div>
+    </View>
   );
 }
