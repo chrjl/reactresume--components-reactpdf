@@ -1,6 +1,6 @@
-# `@reactresume/components`
+# `@reactresume/components-reactpdf`
 
-Component library for [React Resume](https://github.com/chrjl/reactresume) built using Vite library mode with `vite-plugin-dts` and `vite-plugin-lib-inject-css` plugins..
+React-pdf component library for [React Resume](https://github.com/chrjl/reactresume) built using Vite library mode with `vite-plugin-dts` and `vite-plugin-lib-inject-css` plugins.
 
 ## Components
 
