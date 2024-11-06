@@ -1,3 +1,6 @@
+import { PDFViewer } from '@react-pdf/renderer';
+import { Page, Text, View, Document, StyleSheet } from '@react-pdf/renderer';
+
 import {
   HorizontalList,
   LinkifiedSpan,
@@ -8,14 +11,35 @@ import {
 } from '../lib/main';
 import sampleData from './assets/sample-card-data.json';
 import loremArr from './assets/lorem-array.json';
-import styles from './App.module.css';
 
 const { title, subtitle, note, description, highlights } = sampleData;
 
+const styles = StyleSheet.create({
+  page: {
+    padding: '0.5in',
+    fontSize: 14,
+  },
+  h1: {
+    fontWeight: 'bold',
+    fontSize: 28,
+    paddingBottom: 10,
+    marginTop: 28,
+  },
+  h2: {
+    fontWeight: 'bold',
+    fontSize: 21,
+  },
+  example: {
+    backgroundColor: 'lightgray',
+    marginVertical: '5',
+  },
+});
+
 function App() {
   return (
-    <>
-      <h1>Utility components</h1>
+    <PDFViewer width="100%" height="100%">
+      <Document>
+        <Page size="LETTER" style={styles.page}>
 
       <h2>Horizontal List</h2>
       <div>
@@ -108,7 +132,9 @@ function App() {
 
       <h1>Sample data</h1>
       <pre>{JSON.stringify(sampleData, null, 2)}</pre>
-    </>
+        </Page>
+      </Document>
+    </PDFViewer>
   );
 }
 
