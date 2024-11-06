@@ -1,34 +1,10 @@
 import { Text, View, StyleSheet } from '@react-pdf/renderer';
 import type { Style } from '@react-pdf/types';
 
-const styles = StyleSheet.create({
-  container: {
-    overflow: 'hidden',
-  },
-  separator: {
-    width: 20,
-    textAlign: 'center',
-    fontWeight: 'bold',
-  },
-  item: {
-    flexDirection: 'row',
-  },
-  left: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    marginLeft: -20,
-  },
-  right: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    justifyContent: 'flex-end',
-    marginRight: -20,
-  },
-});
-
 interface Props {
   variant?: 'left' | 'right';
   separator?: string;
+  separatorWidth?: number;
   children: string | React.ReactElement | React.ReactElement[];
   style?: Style | Style[];
 }
@@ -36,9 +12,35 @@ interface Props {
 export default function HorizontalList({
   variant = 'left',
   separator = '|',
+  separatorWidth = 20,
   children,
   style: inheritedStyle,
 }: Props) {
+  const styles = StyleSheet.create({
+    container: {
+      overflow: 'hidden',
+    },
+    separator: {
+      width: separatorWidth,
+      textAlign: 'center',
+      fontWeight: 'bold',
+    },
+    item: {
+      flexDirection: 'row',
+    },
+    left: {
+      flexDirection: 'row',
+      flexWrap: 'wrap',
+      marginLeft: -separatorWidth,
+    },
+    right: {
+      flexDirection: 'row',
+      flexWrap: 'wrap',
+      justifyContent: 'flex-end',
+      marginRight: -separatorWidth,
+    },
+  });
+
   const containerStyle = inheritedStyle
     ? [inheritedStyle, styles.container].flat()
     : styles.container;
