@@ -45,7 +45,7 @@ export default function HorizontalList({
     ? [inheritedStyle, styles.container].flat()
     : styles.container;
 
-  if (!Array.isArray(children)) {
+  if (!Array.isArray(children) || children.length === 1) {
     if (typeof children === 'string') {
       return <Text style={containerStyle}>{children}</Text>;
     } else {
