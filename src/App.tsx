@@ -107,6 +107,8 @@ function App() {
               <Text>
                 Lorem, ipsum dolor sit amet consectetur adipisicing elit.
               </Text>
+            </UnorderedList>
+            <UnorderedList style={styles.example} padding={15}>
               <Text>
                 Cumque quaerat ea non esse temporibus voluptatum officia
                 delectus illum rerum iusto, quo, aspernatur voluptatibus quae
