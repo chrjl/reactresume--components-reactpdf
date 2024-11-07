@@ -12,7 +12,7 @@ interface Props extends ListItemProps {
 }
 
 export default function UnorderedList({
-  padding = 25,
+  padding = 30,
   children,
   style: inheritedStyle,
   type = '•',
@@ -46,7 +46,7 @@ function ListItem({ type, padding, children }: ListItemProps) {
     before: {
       boxSizing: 'border-box',
       width: padding,
-      paddingRight: 5,
+      paddingRight: 4,
       textAlign: 'right',
     },
     content: {
