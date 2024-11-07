@@ -52,7 +52,6 @@ export default function GridCard({
     },
     highlights: {
       margin: 0,
-      paddingLeft: 12.5,
     },
     note: {
       padding: 0,
@@ -79,17 +78,15 @@ export default function GridCard({
 
       <View style={[styles.body, rootStyles.content]}>
         {description.length ? (
-          <div className="description">
-            <HorizontalList>
-              {description.map((entry, index) => (
-                <Text key={index}>{entry}</Text>
-              ))}
-            </HorizontalList>
-          </div>
+          <HorizontalList>
+            {description.map((entry, index) => (
+              <Text key={index}>{entry}</Text>
+            ))}
+          </HorizontalList>
         ) : null}
 
         {highlights.length ? (
-          <UnorderedList style={styles.highlights} padding={10}>
+          <UnorderedList style={styles.highlights} padding={12.5}>
             {highlights.map((entry, index) => (
               <Text key={index}>{entry}</Text>
             ))}
