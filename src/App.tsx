@@ -3,6 +3,7 @@ import { Page, Text, View, Document, StyleSheet } from '@react-pdf/renderer';
 
 import {
   HorizontalList,
+  UnorderedList,
   LinkifiedSpan,
   HeadingCard,
   DescriptionTable,
@@ -46,7 +47,7 @@ function App() {
     <PDFViewer width="100%" height="100%">
       <Document>
         <Page size="LETTER" style={styles.page}>
-          <View>
+          <View wrap={false}>
             <Text style={styles.h1}>Horizontal List</Text>
             <Text style={styles.h2}>Plain text child</Text>
             <HorizontalList style={styles.example}>
@@ -76,7 +77,7 @@ function App() {
             </HorizontalList>
           </View>
 
-          <View>
+          <View wrap={false}>
             <Text style={styles.h1}>Linkified Span</Text>
             <Text style={styles.h2}>String</Text>
             <View style={styles.example}>
@@ -92,7 +93,7 @@ function App() {
             </View>
           </View>
 
-          <View>
+          <View wrap={false}>
             <Text style={styles.h1}>Unordered List</Text>
             <UnorderedList style={styles.example}>
               <Text>
@@ -113,10 +114,8 @@ function App() {
               </Text>
             </UnorderedList>
           </View>
-        </Page>
 
-        <Page size="LETTER" style={styles.page}>
-          <View>
+          <View wrap={false}>
             <Text style={styles.h1}>Heading Card</Text>
             <HeadingCard
               title={title}
@@ -128,7 +127,7 @@ function App() {
             />
           </View>
 
-          <View>
+          <View wrap={false}>
             <Text style={styles.h1}>Stacked Card</Text>
             <StackedCard
               title={title}
@@ -139,6 +138,7 @@ function App() {
               style={styles.example}
             />
           </View>
+
           <View wrap={false}>
             <Text style={styles.h1}>Grid Card</Text>
             <View style={[styles.example, styles.grid]}>
@@ -167,19 +167,26 @@ function App() {
                 title={title}
                 subtitle={subtitle}
                 note={note}
-                description={description}
+                description="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Reiciendis ipsam non blanditiis labore vero hic libero, ratione quod atque illo soluta, odit corporis aspernatur inventore temporibus pariatur alias! Ratione, tempora."
                 highlights={highlights}
               />
             </View>
           </View>
-      <h2>Description Table</h2>
-      <DescriptionTable
-        data={[sampleData, sampleData]}
-        className={styles.example}
-      />
 
-      <h1>Sample data</h1>
-      <pre>{JSON.stringify(sampleData, null, 2)}</pre>
+          <View wrap={false}>
+            <Text style={styles.h1}>Description Table</Text>
+            <DescriptionTable
+              data={[
+                sampleData,
+                {
+                  title: 'Lorem ipsum',
+                  description:
+                    'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolorum in placeat dolor expedita, modi distinctio? Accusamus, minus debitis maxime aperiam porro architecto! Alias commodi doloremque molestiae eligendi, dolorem iure sapiente.',
+                },
+              ]}
+              style={styles.example}
+            />
+          </View>
         </Page>
       </Document>
     </PDFViewer>

@@ -1,32 +1,61 @@
-import { Fragment } from 'react';
-import classnames from 'classnames';
+import { View, Text, StyleSheet } from '@react-pdf/renderer';
+import { Style } from '@react-pdf/types';
 
 import type { CardProps } from './types';
 
-import styles from './DescriptionTable.module.css';
+import rootStyles from './styles';
+
+const styles = StyleSheet.create({
+  container: {
+    display: 'flex',
+    flexDirection: 'column',
+    columnGap: 2.5,
+  },
+  entry: {
+    display: 'flex',
+    flexDirection: 'row',
+    columnGap: 10,
+  },
+  term: {
+    textTransform: 'uppercase',
+    fontWeight: 'bold',
+    width: '20%',
+  },
+  description: {
+    width: '80%',
+  },
+});
 
 interface Props {
   data: CardProps[];
   className?: string;
+  style?: Style | Style[];
 }
 
-export default function DefinitionTable({ data, className }: Props) {
+export default function DescriptionTable({
+  data,
+  style: inheritedStyle,
+}: Props) {
+  const containerStyle = inheritedStyle
+    ? [inheritedStyle, styles.container].flat()
+    : styles.container;
+
   return (
-    <dl className={classnames(styles.container, className)}>
+    <View style={containerStyle}>
       {data.map(({ title, description }, index) => (
-        <Fragment key={index}>
-          <dt className={classnames(styles.term, 'bold')}>
+        <View key={index} style={styles.entry}>
+          <Text style={[styles.term, rootStyles.bold]}>
             {Array.isArray(title) ? title.join(' ') : title}
-          </dt>
+          </Text>
           {description && (
-            <dd className={styles.description}>
+            <Text style={[styles.description, rootStyles.content]}>
               {Array.isArray(description)
                 ? description.join(', ')
                 : description}
-            </dd>
+            </Text>
           )}
-        </Fragment>
+        </View>
       ))}
-    </dl>
+    </View>
   );
 }
