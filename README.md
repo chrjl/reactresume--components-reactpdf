@@ -1,6 +1,8 @@
 # `@reactresume/components-reactpdf`
 
-React-pdf component library for [React Resume](https://github.com/chrjl/reactresume) built using Vite library mode with `vite-plugin-dts` and `vite-plugin-lib-inject-css` plugins.
+[React resume](https://github.com/chrjl/reactresume) [component library](https://github.com/chrjl/reactresume--components) refactored into [React-pdf](https://react-pdf.org) components, built using Vite library mode with `vite-plugin-dts` and `vite-plugin-lib-inject-css` plugins.
+
+🗎 [Check out a catalog of included components.](https://github.com/chrjl/reactresume--components-reactpdf/blob/main/assets/catalog.pdf)
 
 ## Components
 
@@ -8,7 +10,8 @@ React-pdf component library for [React Resume](https://github.com/chrjl/reactres
 
 - Shared types
 - HorizontalList component: right and left variants
-- LinkifiedSpan component: converts email and URL strings into `<a>` elements (ordinary strings to `<span>` elements)
+- UnorderedList component: with customizable padding
+- LinkifiedSpan component: converts email and URL strings into `<Link>` elements (ordinary strings to `<Text>` elements)
 
 ### Display components
 
@@ -24,10 +27,10 @@ Accepts a standardized list of props that correspond to React Resume `ResumeEntr
 
 #### Components
 
-- HeaderCard
+- HeadingCard
 - DescriptionTable
-- CardStacked
-- CardGrid
+- StackedCard
+- GridCard
 
 ## Build
 
