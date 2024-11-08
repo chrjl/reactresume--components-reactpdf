@@ -9,11 +9,11 @@ export default defineConfig({
     lib: {
       entry: resolve(__dirname, 'lib/main.ts'),
       formats: ['es'],
-      name: '@reactresume/components',
+      name: '@reactresume/components-reactpdf',
       fileName: 'components',
     },
     rollupOptions: {
-      external: ['react', 'react-dom'],
+      external: ['react', 'react-dom', 'react-pdf'],
       output: {
         globals: {
           react: 'React',
